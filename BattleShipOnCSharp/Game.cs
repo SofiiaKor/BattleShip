@@ -62,7 +62,7 @@ namespace BattleShipOnCSharp
             Console.WriteLine("------------");
             for (int y = 0; y < 10; y++)
             {
-                Console.WriteLine("|");
+                Console.Write("|");
 
                 for (int x = 0; x < 10; x++)
                 {
@@ -71,11 +71,11 @@ namespace BattleShipOnCSharp
                         Move move = new Move(x, y);
                         if (field.HasMove(ref move))
                         {
-                            Console.WriteLine("1");
+                            Console.Write("1");
                         }
                         else
                         {
-                            Console.WriteLine("O");
+                            Console.Write("O");
                         }
                     }
                     else
@@ -83,11 +83,11 @@ namespace BattleShipOnCSharp
                         Move move = new Move(x, y);
                         if (field.HasMove(ref move))
                         {
-                            Console.WriteLine("X");
+                            Console.Write("X");
                         }
                         else
                         {
-                            Console.WriteLine(" ");
+                            Console.Write(" ");
                         }
                     }
                 }
