@@ -1,4 +1,5 @@
 ﻿using System;
+using BattleShip.Domain;
 
 namespace BattleShip.Console
 {

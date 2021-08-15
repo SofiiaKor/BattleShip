@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace BattleShip.Console
+namespace BattleShip.Domain
 {
-    class Game
+    public class Game
     {
         public int WhoseMove;
         private Field field1 = new Field();

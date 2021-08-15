@@ -6,4 +6,8 @@
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BattleShip.Domain\BattleShip.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

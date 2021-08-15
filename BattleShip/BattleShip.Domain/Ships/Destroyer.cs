@@ -1,6 +1,6 @@
-﻿namespace BattleShip.Console.Ships
+﻿namespace BattleShip.Domain.Ships
 {
-    class Destroyer : Ship
+    public class Destroyer : Ship
     {
         public Destroyer()
         {

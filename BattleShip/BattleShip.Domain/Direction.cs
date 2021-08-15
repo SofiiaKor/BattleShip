@@ -1,6 +1,6 @@
-﻿namespace BattleShip.Console
+﻿namespace BattleShip.Domain
 {
-    enum Direction
+    public enum Direction
     {
         Up, 
 	    Left, 

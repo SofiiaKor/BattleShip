@@ -1,6 +1,6 @@
-﻿namespace BattleShip.Console
+﻿namespace BattleShip.Domain
 {
-    class Position
+    public class Position
     {
 		public int XPosition;
 		public int YPosition;

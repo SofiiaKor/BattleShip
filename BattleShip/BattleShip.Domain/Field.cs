@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace BattleShip.Console
+namespace BattleShip.Domain
 {
-    class Field
+    public class Field
     {
         public Ship[] Ships;
         public Move[] Moves;

@@ -1,6 +1,6 @@
-﻿namespace BattleShip.Console
+﻿namespace BattleShip.Domain
 {
-    enum Result
+    public enum Result
     {
         Missed,
 	    Hit,

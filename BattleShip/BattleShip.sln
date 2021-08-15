@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BattleShip.Console", "Battl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BattleShip.WinForms", "BattleShip.WinForms\BattleShip.WinForms.csproj", "{A013B4B9-FB2B-4733-B91A-1E1C8DFA498B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BattleShip.Domain", "BattleShip.Domain\BattleShip.Domain.csproj", "{40DC934F-499C-4A0C-B086-8332459C779A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A013B4B9-FB2B-4733-B91A-1E1C8DFA498B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A013B4B9-FB2B-4733-B91A-1E1C8DFA498B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A013B4B9-FB2B-4733-B91A-1E1C8DFA498B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40DC934F-499C-4A0C-B086-8332459C779A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40DC934F-499C-4A0C-B086-8332459C779A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40DC934F-499C-4A0C-B086-8332459C779A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40DC934F-499C-4A0C-B086-8332459C779A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

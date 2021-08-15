@@ -1,6 +1,6 @@
-﻿namespace BattleShip.Console
+﻿namespace BattleShip.Domain
 {
-    class Ship
+    public class Ship
     {
         protected int Size;
         protected Position StartPoint;
