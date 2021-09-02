@@ -4,103 +4,34 @@ namespace BattleShip.Domain
 {
     public class Game
     {
-        public int WhoseMove;
-        private Field field1 = new Field();
-        private Field field2 = new Field();
-        private Result result;
-
-        public Game() { result = Result.Untouched; } // ???
+        public int CurrentMove;
+        public Field Field1 = new Field();
+        public Field Field2 = new Field();
+        public Result Result;
 
         public void Setup()
         {
-            field1.AllocateShips();
-            field2.AllocateShips();
-            WhoseMove = ChooseWhoseMove();
+            Field1.AllocateShips();
+            Field2.AllocateShips();
+
+            var random = new Random();
+            CurrentMove = random.Next(0, 2);
         }
+
         public bool MakeMove(int x, int y)
         {
-            switch (WhoseMove)
-            {
-                case 0:
-                    {
-                        result = field2.Shoot(x, y);
-                        break;
-                    }
-                case 1:
-                    {
-                        result = field1.Shoot(x, y);
-                        break;
-                    }
-                default:
-                    break;
-            }
+            var field = CurrentMove == 0 ? Field2 : Field1;
+            Result = field.Shoot(x, y);
 
-            // field.IsEnd() -> return true;
-            if (field1.IsEnd() || field2.IsEnd())
+            if (Field1.IsEnd() || Field2.IsEnd())
                 return true;
 
-            if (result == Result.Missed)
+            if (Result == Result.Missed || Result == Result.Untouched)
             {
-                WhoseMove = WhoseMove == 0 ? 1 : 0;
+                CurrentMove = CurrentMove == 0 ? 1 : 0;
             }
 
             return false;
-        }
-        public void Print()
-        {
-            //system("CLS");
-
-            if (WhoseMove == 0)
-                Print(field2);
-            else
-                Print(field1);
-        }
-        public void Print(Field field)
-        {
-            System.Console.WriteLine("------------");
-            for (int y = 0; y < 10; y++)
-            {
-                System.Console.Write("|");
-
-                for (int x = 0; x < 10; x++)
-                {
-                    if (field.Intercepts(x, y))
-                    {
-                        Move move = new Move(x, y);
-                        if (field.HasMove(ref move))
-                        {
-                            System.Console.Write("1");
-                        }
-                        else
-                        {
-                            System.Console.Write("O");
-                        }
-                    }
-                    else
-                    {
-                        Move move = new Move(x, y);
-                        if (field.HasMove(ref move))
-                        {
-                            System.Console.Write("X");
-                        }
-                        else
-                        {
-                            System.Console.Write(" ");
-                        }
-                    }
-                }
-
-                System.Console.WriteLine("|");
-            }
-        }
-
-        public int ChooseWhoseMove()
-        {
-            var random = new Random();
-            WhoseMove = random.Next(0, 2);
-
-            System.Console.WriteLine("Player #" + (WhoseMove + 1) + " starts.");
-            return WhoseMove;
         }
     }
 }

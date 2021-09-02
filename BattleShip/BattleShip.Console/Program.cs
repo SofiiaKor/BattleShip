@@ -3,12 +3,22 @@ using BattleShip.Domain;
 
 namespace BattleShip.Console
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
             var battleShipService = new BattleShipService();
             battleShipService.Start();
+            battleShipService.Print();
+
+            var end = false;
+            while (!end)
+            {
+                end = battleShipService.MakeMove();
+                battleShipService.Print();
+            }
+
+            battleShipService.End();
         }
     }
 }

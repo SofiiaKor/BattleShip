@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace BattleShip.Domain
 {
@@ -6,10 +7,19 @@ namespace BattleShip.Domain
     {
         public Ship[] Ships;
         public Move[] Moves;
+
         public Field()
         {
             Ships = new Ship[10];
-            Moves = new Move[0];
+            //foreach (var variable in Ships)
+            //variable = new Ship();
+
+            for (var i = 0; i < Ships.Length; i++)
+            {
+                Ships[i] = new Ship();
+            }
+            // Moves should repeat at most two times
+            Moves = Array.Empty<Move>();
         }
 
         public void AllocateShips()
@@ -28,25 +38,23 @@ namespace BattleShip.Domain
             Ships[8] = AllocateShip(1);
             Ships[9] = AllocateShip(1);
         }
+
         private Ship AllocateShip(int length)
         {
-            bool isAllowed;
-            Random rand = new Random();
-            int dir = rand.Next(0, 3);
+            var random = new Random();
+            var direction = (Direction)random.Next(0, 3);
 
-            int x, y;
-            Direction direction;
-            do
+            while (true)
             {
-                x = rand.Next(1, 10);
-                y = rand.Next(1, 10);
-                direction = (Direction)dir;
-                isAllowed = IsShipPositionAllowed(x, y, length, direction);
-            } while (!isAllowed);
+                var x = random.Next(1, 10);
+                var y = random.Next(1, 10);
 
-            Ship ship = new Ship(x, y, length, direction);
-            return ship;
+                var isAllowed = IsShipPositionAllowed(x, y, length, direction);
+                if (isAllowed)
+                    return new Ship(x, y, length, direction);
+            }
         }
+
         public bool IsShipPositionAllowed(int x, int y, int length, Direction direction)
         {
             switch (direction)
@@ -66,8 +74,6 @@ namespace BattleShip.Domain
                 case Direction.Right:
                     if (x + (length - 1) > 9)
                         return false;
-                    break;
-                default:
                     break;
             }
 
@@ -94,23 +100,22 @@ namespace BattleShip.Domain
                     startX = x;
                     endX = x + (length - 1);
                     break;
-                default:
-                    break;
             }
 
-            //for (int i = startX - 1; i <= endX + 1; i++)
-            //{
-            //    for (int j = startY - 1; j <= endY + 1; j++)
-            //    {
-            //        if (Intercepts(i, j))
-            //        {
-            //            return false;
-            //        }
-            //    }
-            //}
+            for (var i = startX - 1; i <= endX + 1; i++)
+            {
+                for (var j = startY - 1; j <= endY + 1; j++)
+                {
+                    if (Intercepts(i, j))
+                    {
+                        return false;
+                    }
+                }
+            }
 
             return true;
         }
+
         public bool Intercepts(int x, int y)
         {
             for (var i = 0; i < 10; i++)
@@ -120,69 +125,52 @@ namespace BattleShip.Domain
                     return true;
                 }
             }
+
             return false;
         }
+
         public Result Shoot(int x, int y)
         {
-            Move move = new Move(x, y);
-
-            if (HasMove(ref move))
+            var move = new Move(x, y);
+            if (HasMove(move))
             {
-                System.Console.WriteLine("Do not repeat.");
                 return Result.Untouched;
             }
 
-            Add(ref move);
+            Add(move);
 
-            for (int i = 0; i < 10; i++)
+            for (var i = 0; i < 10; i++)
             {
                 if (Ships[i].Intercepts(move.XPosition, move.YPosition))
                 {
-                    System.Console.WriteLine("You hit that!");
                     return Result.Hit;
                 }
             }
 
-            System.Console.WriteLine("Opps, you've missed.");
             return Result.Missed;
         }
-        public void Add(ref Move move)
+
+        public void Add(Move move)
         {
-            Move[] newArr = new Move[Moves.Length + 1];
-            for (int i = 0; i < Moves.Length; i++)
+            var array = new Move[Moves.Length + 1];
+            for (var i = 0; i < Moves.Length; i++)
             {
-                newArr[i] = Moves[i];
+                array[i] = Moves[i];
             }
-            newArr[Moves.Length] = move;
-            Moves = newArr;
+            array[Moves.Length] = move;
+
+            Moves = array;
         }
-        public bool HasMove(ref Move move)
+
+        public bool HasMove(Move move)
         {
-            for (int i = 0; i < Moves.Length; i++)
-            {
-                if (Moves[i].XPosition == move.XPosition && Moves[i].YPosition == move.YPosition)
-                {
-                    return true;
-                }
-            }
-            return false;
+            return Moves.Any(existingMove => existingMove.Equals(move));
         }
+
         public bool IsEnd()
         {
-            int counter = 0;
-
-            for (int i = 0; i < Moves.Length; i++)
-            {
-                if (Intercepts(Moves[i].XPosition, Moves[i].YPosition))
-                {
-                    counter++;
-                }
-            }
-
-            if (counter == 20)
-                return true;
-
-            return false;
+            var counter = Moves.Count(move => Intercepts(move.XPosition, move.YPosition));
+            return counter >= 20;
         }
     }
 }

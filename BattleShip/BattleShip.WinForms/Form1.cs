@@ -10,12 +10,16 @@ using System.Windows.Forms;
 
 namespace BattleShip.WinForms
 {
-    public partial class Form1 : Form
+    public partial class BattleShip : Form
     {
-        public Form1()
+        public BattleShip()
         {
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

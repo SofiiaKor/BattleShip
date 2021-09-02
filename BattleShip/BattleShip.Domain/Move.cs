@@ -1,11 +1,24 @@
-﻿namespace BattleShip.Domain
-{
-    public class Move
-    {
-    public int XPosition;
-    public int YPosition;
+﻿using System;
+using System.Drawing;
 
-    public Move(int x, int y) { XPosition = x; YPosition = y; }
-    public Move() { XPosition = 0; YPosition = 0; }
+namespace BattleShip.Domain
+{
+    public class Move : IEquatable<Move>
+    {
+        public int XPosition;
+        public int YPosition;
+
+        public Move(int x, int y)
+        {
+            XPosition = x;
+            YPosition = y;
+        }
+
+        public bool Equals(Move other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return XPosition == other.XPosition && YPosition == other.YPosition;
+        }
     }
 }

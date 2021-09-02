@@ -3,8 +3,7 @@
     public enum Result
     {
         Missed,
-	    Hit,
-	    Untouched
-
+        Hit,
+        Untouched
     }
 }

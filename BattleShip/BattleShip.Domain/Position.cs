@@ -2,21 +2,21 @@
 {
     public class Position
     {
-		public int XPosition;
-		public int YPosition;
-		public Direction direction;
+        public int X;
+        public int Y;
+        public Direction Direction;
 
         public Position()
         {
-            XPosition = 0;
-            YPosition = 0;
-            direction = Direction.Down;
+            X = 0;
+            Y = 0;
+            Direction = Direction.Down;
         }
-		public Position(int x, int y, Direction drt)
+        public Position(int x, int y, Direction direction)
         {
-            XPosition = x;
-            YPosition = y;
-            direction = drt;
+            X = x;
+            Y = y;
+            Direction = direction;
         }
-	}
+    }
 }
